@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Multi wallet</title>
+	<meta name="description" content="">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<meta property="og:image" content="path/to/image.jpg">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#000">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#000">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+
+	<style>body { opacity: 0; overflow-x: hidden; } html { background-color: #fff; }</style>
+
+</head>
+
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="logo"><img src="img/logo.svg" alt=""></div>	
+			<div class="rules"><a href="#rules" class="popup">FAQ</a></div>		
+		</header>	
+		<div class="content">
+			<div class="menu">
+				<div class="search">
+					<input type="text" class="value_search" placeholder="enter name of wallet"><button id="search_btn">search</button>
+					<a href="#create" class="popup"><button class="new_wallet_create">create new wallet</button></a>
+					<div class="balance">balance: <span></span></div>
+				</div>				
+			</div>
+
+			<div class="container">
+				<div class="name_wallet"><h1></h1></div>				
+				<div class="row">
+					<div class="column col_owners">
+						<h2>the owners wallet</h2>
+						<ul>							
+						</ul>
+					</div>
+					<div class="column col_notice">
+						<h2>suggest to withdraw</h2>
+						<ul>
+							<li><span>to:</span><span class="adress"></span></li>
+							<li><span>amount:</span><amount></amount></li>
+							<li><span>accepted:</span><accept class="accepted"></accept></li>
+							<button>vote</button>
+						</ul>
+					</div>
+					<div class="column col_menu">
+						<ul>
+							<li><a href="#" class="dep"><button>deposit</button></a></li>							
+							<li><a href="#" class="draw"><button>withdraw</button></a></li>
+							<li><a href="#sugg" class="popup sugg"><button>suggest</button></a></li>
+						</ul>
+					</div>
+				</div>				
+				<div class="test_resp"></div>
+			</div>			
+		</div>
+	</div>	
+	<div class="noExtension" style="display: none"> 
+		NOTE: Please install <a style="color: red" target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>  to use Multi wallet
+	</div>
+	<div class="errNetwork" style="display: none">
+		NOTE: Sorry, you use incorrect net
+	</div>
+	
+	<div id="create" class="mfp-hide mfp-fade pop">
+		<h1>Create new wallet</h1>
+		<h3>The "address name" field for easy identification of co-owners of the wallet</h3>
+		<form>
+			<input type="text" class="owner_name" placeholder="address name">
+			<input type="text" class="wallet_adress" placeholder="wallet address">
+			<br>
+			<input type="text" class="owner_name" placeholder="address name">
+			<input type="text" class="wallet_adress" placeholder="wallet address">
+			<br>
+			<input type="text" class="owner_name" placeholder="address name">
+			<input type="text" class="wallet_adress" placeholder="wallet address">
+			<br>
+			<input type="text" class="owner_name" placeholder="address name">
+			<input type="text" class="wallet_adress" placeholder="wallet address">
+			<br>
+			<input type="text" class="owner_name" placeholder="address name">
+			<input type="text" class="wallet_adress" placeholder="wallet address">
+			<br>
+			<input type="text" class="lvl_democracy" placeholder="required votes">			
+			<input type="text" class="wallet_name" placeholder="wallet name">
+			<br>
+			<button>create wallet</button>
+		</form>
+	</div>	
+	<div id="sugg" class="mfp-hide mfp-fade pop">
+		<h1>Suggest</h1>
+		<input type="text" class="addres_sugg" placeholder="address of the recipient">
+		<br>
+		<input class="amount_sugg" type="number" placeholder="amount">
+		<br>
+		<button>suggest</button> 
+	</div>
+
+	<div id="rules" class="mfp-hide mfp-fade pop">
+		<h1>FAQ</h1>	
+		<div class="container_faq">
+		<h4>How to create a multi-wallet?</h4>
+		<p>1. Use the "create new wallet" button <br>	
+			2. Fill in the required information in the pop-up and send: <br>
+			     "Wallet address" — address of the wallet of the future co-owner;<br>
+			     "Address name" — is the name that identifies the address of the wallet. This name is necessary only for convenient use of the wallet; <br>	
+			     "Required votes" — the number of votes that will be needed to make a decision on the withdrawal of funds <br>
+			     "Wallet name" is the name of the wallet. It is necessary to manage the wallet.
+		</p>
+		<h4>How to find my wallet?</h4>
+		<p>Just enter his name in the search field and click "search"</p>
+		<h4>How to withdraw funds?</h4>
+		<p>First, we need to put forward a proposal for a vote. To do this, use the "suggest" button, when you need to get the number of votes you can withdraw funds</p>
+		<h4>How to find out who has already voted on the proposal for withdrawal?</h4>
+		<p>Each wallet owner displays the status next to it: <br>green circle — voted; <br>yellow circle — did not vote
+		</p>
+			<h4>How to make a deposit?</h4>
+			<p>Use the "deposit" button</p>
+		</p>
+		</div>	
+	</div>
+
+	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<script src="js/scripts.min.js"></script>
+	<script src='js/nebPay.js'></script>    
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">	
+
+	<script>
+		window.onload = function(){		
+		if(typeof(webExtensionWallet) === "undefined"){	    
+	        $(".noExtension").show();	  
+	        $(".content").hide();
+	    } else{ 		    	
+	    }		    		  			  	 			 		
+ 	};	 		 	    		
+
+	$('#create button').click(function(){		
+		var owner_names = $(".owner_name").toArray();	
+		for ( var i = 0; i < owner_names.length; i++ ) {
+			owner_names[i] = owner_names[i].value;
+			if(owner_names[i] == ''){	
+				owner_names.splice(i, 1);
+				i--;
+			};			
+		}				
+		var addreses = $(".wallet_adress").toArray();	
+		for ( var i = 0; i < addreses.length; i++ ) {
+			addreses[i] = addreses[i].value;
+			if(addreses[i] == ''){	
+				addreses.splice(i, 1);
+				i--;
+			};			
+			console.log(JSON.stringify(JSON.stringify(addreses)));
+		}	
+		var wallet_name_for_create = $('.wallet_name').val();		
+		var lvl_democracy = $('.lvl_democracy').val();	
+
+		var to = dappAddress;
+        var value = "0";
+        var callFunction = "create";        
+        // var callArgs = JSON.stringify(["" +wallet_name_for_create + "",""+ lvl_democracy + "","[\"n1NyNsoEsiGrJArwvB6cPoUKfG964x7LLBo\",\"n1NyNsoEsiGrJArwvB6cPoUKfG964x7LLBo\",\"n1WoDz8h2o75oXtVLowDLd5dyDkTC4UVxHE\"]","[\"Artur\",\"House\",\"PISOS\"]"]);
+		var callArgs = JSON.stringify(["" + wallet_name_for_create + "",""+ lvl_democracy + "","" + JSON.stringify(addreses) + "","" + JSON.stringify(owner_names) + ""]);        
+        // var callArgs = "[\"" + wallet_name_for_create + "\",\"" + lvl_democracy +  "\",\""  +  JSON.stringify(addreses)  + "\",\"" + JSON.stringify(owner_names) +"\"]"		
+		nebPay.call(to, value, callFunction, callArgs, { 
+	            listener: cbPush
+        });	
+
+	})
+
+
+ 	$('.popup').magnificPopup({
+		type:'inline',
+		fixedContentPos: true, 
+		mainClass: 'mfp-fade',      
+		showCloseBtn: true,
+		closeOnBgClick: true
+	});		
+
+
+ 	var NebPay = require("nebpay");   
+    var nebPay = new NebPay();
+	var dappAddress = "n1zRPgqfCrh8Z2aCQrYfjJrqKrYnqaiMya6";
+		
+
+		$(document).ready(function(){				  
+	        var to = dappAddress;
+	        var value = "0";
+	        var callFunction = "read";
+	        var callArgs = "[\"" + $('.value_search').val() + "\"]";
+	        nebPay.simulateCall(to, value, callFunction, callArgs, { 
+	            listener: cbSearch	            
+	        });	        	        	      
+	        		    
+	    })
+
+
+		$('.search button').click(function() {
+			var to = dappAddress;
+	        var value = "0";
+	        var callFunction = "read";
+			var callArgs = "[\"" + $('.value_search').val() + "\"]";
+			nebPay.simulateCall(to, value, callFunction, callArgs, { 
+	            listener: cbSearch
+	        });	
+	        var callFunction_simmulate = "isAvailable";
+	        nebPay.simulateCall(to, value, callFunction_simmulate, callArgs, { 
+	            listener: cbSearch_button
+	        });
+		})
+
+		function cbSearch_button(resp) {			
+			var bool_for_btn = resp.result;			
+			if (bool_for_btn === 'true') {
+				$('.col_notice button').prop("disabled",false);				
+				$('.col_notice button').css('opacity', '1');
+			} else {
+				$('.col_notice button').prop("disabled",true);
+				$('.col_notice button').css('opacity', '.4');
+			}
+		}
+
+		$('.col_notice button').click(function(){
+			var to = dappAddress;
+	        var value = "0";
+	        var callFunction = "vote";
+			var callArgs = "[\"" + $('.name_wallet h1').text() + "\"]";
+			nebPay.call(to, value, callFunction, callArgs, { 
+	            listener: cbPush
+	        });		        
+		})
+
+		$('#sugg button').click(function(){
+			var to = dappAddress;
+	        var value = "0";
+	        var callFunction = "suggest";
+			var callArgs = "[\"" + $('.name_wallet h1').text() + "\",\"" + $('.addres_sugg').val() + "\",\"" + ($(".amount_sugg").val()*1000000000000000000) +  "\"]";
+			nebPay.call(to, value, callFunction, callArgs, { 
+	            listener: cbPush
+	        });		  	              
+		})
+
+		$('.dep').click(function(){
+			var to = dappAddress;
+	        var value = "0";
+	        var callFunction = "deposit";
+			var callArgs = "[ \" " + $('.name_wallet h1').text() +  "\"]";
+			nebPay.call(to, value, callFunction, callArgs, { 
+	            listener: cbPush
+	        });		  	              	
+		})
+
+		$('.draw').click(function(){
+			var to = dappAddress;
+	        var value = "0";
+	        var callFunction = "cashout";
+			var callArgs = "[\"" + $('.name_wallet h1').text() +  "\"]";
+			nebPay.call(to, value, callFunction, callArgs, { 
+	            listener: cbDraw
+	        });		  	              	
+		})		
+
+		function cbDraw (resp) {
+			console.log("сука сон: " + JSON.stringify(resp));	    
+		}
+
+		function cbSearch(resp) {
+			var result = resp.result;			
+			var xui = JSON.stringify(result);
+			console.log("return of rpc call_xui: " + xui);							
+			if ( xui === '"Error: empty name"' || xui === '"Error: The are no DAO with this name"') {	
+				$('.name_wallet h1').empty();
+				$('.balance span').empty();
+				$('amount').empty();
+				$('.col_notice .adress').empty();
+				$('.accepted').empty();
+				$('.col_owners ul').empty();
+				$('.row').hide();
+				$('.name_wallet h1').html('Error: The are no wallet with this name');
+			};
+
+			if (result === ''){	            
+				$(".errNetwork").show();	  
+	        	$(".content").hide();
+			}else{	            
+            try{
+                result = JSON.parse(result);                
+    		} catch (err){	                
+            	}
+
+            if (result.balance){    
+            	$('.row').show();
+            	$('.name_wallet h1').html($('.value_search').val());
+            	$('.balance span').html((result.balance/1000000000000000000) + ' NAS');
+            	$('amount').html((result.amountToSend/1000000000000000000) + ' NAS');
+            	$('.col_notice .adress').html(result.toSent);
+            	$('.accepted').html(result.currenVotes + "/" + result.minVotes);
+            	$('.col_owners ul').empty();
+				$.each(result.arr,function(index,value){
+					if(result.arr[index].bool) {
+						$('.col_owners ul').append('<li><span class="circle green"></span><span class="index">' + (index + 1) + '. </span><span class="member">' + result.arr[index].name + '<br><span class="adress">' + result.arr[index].addr + '</span></span></li>')
+					} else {						
+						$('.col_owners ul').append('<li><span class="circle yellow"></span><span class="index">' + (index + 1) + '. </span><span class="member">' + result.arr[index].name + '<br><span class="adress">' + result.arr[index].addr + '</span></span></li>')
+					}
+				}); }  				    		
+        	}
+		}
+
+		 function cbPush(resp) {
+
+	        console.log("response of push: " + resp);	        			
+        	var wallet_name = $('.name_wallet h1').text();
+        	console.log(wallet_name);
+	        setTimeout(function(){
+	        	console.log(wallet_name);
+	        	$('.mfp-close').trigger('click');
+	        	$('.value_search').val(wallet_name);
+				$('#search_btn').trigger('click');
+			},20000);
+
+	    }	    
+
+	</script>
+</body>
+</html>
