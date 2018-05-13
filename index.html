@@ -37,9 +37,10 @@
 		<div class="content">
 			<div class="menu">
 				<div class="search">
-					<input type="text" class="value_search" placeholder="enter name of wallet"><button id="search_btn">search</button>
+					<input type="text" class="value_search" placeholder="enter name of wallet"><button class="search_btn">search</button>
 					<a href="#create" class="popup"><button class="new_wallet_create">create new wallet</button></a>
-					<div class="balance">balance: <span></span></div>
+					<button class="search_btn" style="background: transparent; width: unset; height: unset; border-radius: unset"><img style="width: 25px; line-height: 1; vertical-align: middle; margin-left: 20px; cursor: pointer;" src="img/icons8-restart-90.png" alt=""></button>
+					<div style="margin-top: 5px;" class="balance">balance: <span></span></div>
 				</div>				
 			</div>
 
@@ -333,7 +334,7 @@
 	        	console.log(wallet_name);
 	        	$('.mfp-close').trigger('click');
 	        	$('.value_search').val(wallet_name);
-				$('#search_btn').trigger('click');
+				$('.search_btn').trigger('click');
 			},20000);
 
 	    }	    
